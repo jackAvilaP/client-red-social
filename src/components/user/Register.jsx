@@ -1,13 +1,24 @@
 import React from "react";
+import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
 
 const Register = () => {
   const { form, changed } = useForm({});
 
-  const saveRegister = (e) => {
+  const saveRegister = async (e) => {
     e.preventDefault();
     let newUser = form;
-    console.log(newUser);
+    const request = await fetch(Global.localhost + "user/register", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    console.log(data);
   };
   return (
     <div className="hero min-h-screen bg-base-200 my-1">
@@ -25,18 +36,7 @@ const Register = () => {
               onChange={changed}
             />
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Last name</span>
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-              className="input input-bordered"
-              onChange={changed}
-            />
-          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Nick</span>
