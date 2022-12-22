@@ -1,25 +1,35 @@
 import React from "react";
+import user from '../../assets/img/user.png';
 
 const NavBar = () => {
   return (
-    <div className="navbar  bg-base-100 justify-between shadow-lg ">
-      <a className="btn btn-ghost normal-case text-xl">Social Space</a>
-      <ul className="menu menu-horizontal px-1">
-        <li>
-          <a>
-            {" "}
+     <div className="navbar bg-base-100 flex justify-between shadow-lg ">
+      <div>
+        <a className="btn btn-ghost normal-case text-xl">Social Space</a>
+      </div>
+      <div>
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button
+            type="button"
+            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Open main menu</span>
+
             <svg
+              class="block h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
+              stroke-width="1.5"
               stroke="currentColor"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
             </svg>
             Home
@@ -29,17 +39,18 @@ const NavBar = () => {
           <a>
             {" "}
             <svg
+              class="hidden h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
+              stroke-width="1.5"
               stroke="currentColor"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
               />
             </svg>
             Timeline
@@ -122,10 +133,11 @@ const NavBar = () => {
             <input type="checkbox" className="toggle mx-3" />
           </div>
         </div>
+        <p>Nick</p>
         <div className="dropdown dropdown-end mx-4">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+              <img src={user} />
             </div>
           </label>
 
