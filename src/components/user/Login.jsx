@@ -1,32 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
 
 const Login = () => {
   const { form, changed } = useForm({});
-
+  const [loginMessage, setLoginMessage] = useState("")
   const loginUser = async (e) => {
     e.preventDefault();
     let login = form;
 
-    const request = await fetch(Global.localhost + "user/login",{
-      method:"POST",
-      body:JSON.stringify(login),
-      headers:{
-        "content-type":"application/json"
+    const request = await fetch(Global.localhost + "user/login", {
+      method: "POST",
+      body: JSON.stringify(login),
+      headers: {
+        "content-type": "application/json"
       }
     })
     const data = await request.json();
-    console.log(data);
+    console.log(data ,loginMessage);
+    setLoginMessage(data.message);
   }
 
   return (
-    <div className="min-h-screen text-center bg-base-200">
+    <div className=" min-h-screen text-center bg-base-200">
 
       <div className="hero min-h-screen bg-base-200">
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={loginUser} className="card-body">
-
+            <div>
+              {
+                loginMessage === "success" &&
+                <h1 className="text-2xl font-bold">Login successful</h1>
+              }
+            </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
