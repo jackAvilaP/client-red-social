@@ -17,7 +17,7 @@ const Login = () => {
       }
     })
     const data = await request.json();
-    console.log(data ,loginMessage);
+    console.log(loginMessage);
     setLoginMessage(data.message);
   }
 
