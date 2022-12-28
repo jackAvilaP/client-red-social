@@ -2,3 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    /* Card info user */
+    .card {
+        @apply border-solid border-2 border-gray-200 rounded-xl p-6 overflow-hidden;
+    }
+    .card-header {
+        @apply flex items-center mb-3;
+    }
+    .card-body {
+        @apply p-2;
+    }
+
+    .card .card-header .card-img {
+        @apply avatar w-20 rounded-full;
+    }
+
+    .card .card-header .card-title {
+        @apply font-bold mb-2 ml-2;
+    }
+
+    .card .card-header .card-subtitle {
+        @apply font-medium ml-2;
+    }
+
+    .card .card-body .card-list {
+        @apply flex;
+    }
+    .card .card-body .card-list .card-li {
+        @apply mx-4 text-center ;
+    }
+
+    .card .card-body .card-list .card-li .card-number {
+        @apply text-green-500 font-bold;
+    }
+}

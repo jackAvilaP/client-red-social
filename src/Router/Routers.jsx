@@ -8,10 +8,12 @@ import Feed from "../components/publication/Feed";
 import Login from "../components/user/Login";
 import Register from "../components/user/Register";
 
+
 const Routers = () => {
   return (
     <BrowserRouter>
-      {/* nested routes       */}
+
+      {/* nested routes */}
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Login />} />
@@ -26,6 +28,7 @@ const Routers = () => {
 
         <Route path="*" element={<h1>Error 404</h1>} />
       </Routes>
+
     </BrowserRouter>
   );
 };
