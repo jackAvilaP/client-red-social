@@ -7,7 +7,6 @@ const PublicLayout = () => {
     <>
       {/* LAYAOUT */}
       <NavBar />
-
       {/* Content Main */}
       <section>
         <Outlet />

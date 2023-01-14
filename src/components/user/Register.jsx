@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
@@ -9,18 +10,12 @@ const Register = () => {
   const saveRegister = async (e) => {
     e.preventDefault();
     let newUser = form;
-    const request = await fetch(Global.localhost + "user/register", {
-      method: "POST",
-      body: JSON.stringify(newUser),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
 
-    const data = await request.json();
-    
-    setSaveUser(data.message)
+    axios.post(Global.localhost + "user/register", newUser)
+      .then((res) => setSaveUser(res.data?.message));
+
   };
+  
   return (
     <div className="flex justify-center items-center min-h-screen bg-base-200">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

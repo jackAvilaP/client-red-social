@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
 
-import { useDispatch, useSelector } from "react-redux";
+
 
 
 
@@ -11,41 +12,23 @@ const Login = () => {
   const { form, changed } = useForm({});
   const [loginMessage, setLoginMessage] = useState("");
 
+
   const loginUser = async (e) => {
     e.preventDefault();
     let login = form;
-
-    const request = await fetch(Global.localhost + "user/login", {
-      method: "POST",
-      body: JSON.stringify(login),
-      headers: {
-        "content-type": "application/json"
-      }
-    })
-    const data = await request.json();
-
-    setLoginMessage(data.message);
-    if (data.status === "success") {
-       localStorage.setItem("token", data.token);
-       localStorage.setItem("user", JSON.stringify(data.user));
-    }
+    
+    axios.post(Global.localhost + "user/login", login)
+      .then((res) => {
+        setLoginMessage(res.data?.message);
+        if (loginMessage === "success") {
+          localStorage.setItem("token", res.data?.token);
+          localStorage.setItem("user", JSON.stringify(res.data?.user));
+        }
+      });
 
   }
 
 
-  const enviar = async (e) => {
-    e.preventDefault();
-
-    // const request = await fetch(Global.localhost + "user/getUser/" + userId.id, {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     "Authorization": token
-    //   }
-    // })
-    // const data = await request.json();
-
-  }
 
   return (
     <div className=" min-h-screen text-center bg-base-200">
@@ -89,7 +72,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <button className="btn btn-primary" onClick={enviar}> Slice</button>
+          <button className="btn btn-primary"> Slice</button>
         </div>
       </div>
     </div>
