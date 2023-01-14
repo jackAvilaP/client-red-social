@@ -11,15 +11,15 @@ export const counterSlice = createSlice({
     initialState,
 
     reducers: {
-        increment: (state) => {
+        increment: (state, action) => {
             state.value++;
         },
 
-        decrement: (state) => {
+        decrement: (state, action) => {
             state.value -= 1
         },
 
-        reset: (state) => {
+        reset: (state, action) => {
             state.value = 0;
         }
     }

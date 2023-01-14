@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Global } from "../../helpers/Global";
 import useForm from "../../hooks/useForm";
 
+import { useDispatch, useSelector } from "react-redux";
+
+
+
+
 const Login = () => {
   const { form, changed } = useForm({});
-  const [loginMessage, setLoginMessage] = useState("")
+  const [loginMessage, setLoginMessage] = useState("");
+
   const loginUser = async (e) => {
     e.preventDefault();
     let login = form;
@@ -17,12 +23,28 @@ const Login = () => {
       }
     })
     const data = await request.json();
-    console.log(data, loginMessage);
+
     setLoginMessage(data.message);
     if (data.status === "success") {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+       localStorage.setItem("token", data.token);
+       localStorage.setItem("user", JSON.stringify(data.user));
     }
+
+  }
+
+
+  const enviar = async (e) => {
+    e.preventDefault();
+
+    // const request = await fetch(Global.localhost + "user/getUser/" + userId.id, {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     "Authorization": token
+    //   }
+    // })
+    // const data = await request.json();
+
   }
 
   return (
@@ -67,6 +89,7 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <button className="btn btn-primary" onClick={enviar}> Slice</button>
         </div>
       </div>
     </div>

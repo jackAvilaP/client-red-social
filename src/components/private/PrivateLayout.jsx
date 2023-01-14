@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import SideBar from "./SideBar";
 
 const PrivateLayout = () => {
+  
   return (
     <>
       {/* LAYAOUT */}
@@ -15,6 +16,7 @@ const PrivateLayout = () => {
       </section>
       {/* SideBar  */}
       <SideBar />
+      
     </>
   );
 };

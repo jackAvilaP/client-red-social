@@ -18,7 +18,7 @@ const Register = () => {
     });
 
     const data = await request.json();
-    console.log(data)
+    
     setSaveUser(data.message)
   };
   return (
