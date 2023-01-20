@@ -8,7 +8,7 @@ const InfoHeader = () => {
                 <button className="btn btn-primary btn-xs  mx-2 "> show new</button>
             </div>
             <div className='p-6'>
-                <h1 className='text-5xl font-bold mr-3'>Hi, jackson</h1>
+                <h1 className='text-5xl text-primary font-bold mr-3'>Hi, jackson</h1>
             </div>
         </section>
     )
