@@ -1,13 +1,25 @@
 import React from 'react'
+import InfoHeader from '../private/InfoHeader';
+import SideBar from '../private/SideBar';
+import CardPublication from './CardPublication';
 
-import InfoUser from '../user/InfoUser';
+
 
 const Feed = () => {
 
   return (
     <div>
-      <section className='w-1/3'>
-        <InfoUser />
+      <InfoHeader />
+      <section className='grid grid-cols-6 gap-3'>
+        <div className='col-start-1 col-end-5 p-2'>
+          <CardPublication />
+          <CardPublication />
+          <CardPublication />
+          <CardPublication />
+        </div>
+        <div className='col-span-2'>
+          <SideBar />
+        </div>
       </section>
     </div>
   )

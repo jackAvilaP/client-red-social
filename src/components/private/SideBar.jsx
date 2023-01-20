@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Global } from "../../helpers/Global";
+import InfoUser from '../user/InfoUser';
+import CardThinking from '../private/CardThinking';
 
 
 const SideBar = () => {
@@ -16,12 +18,11 @@ const SideBar = () => {
   }, [1])
 
   return (
-    <aside>
-      <header>
-        side bar
-      </header>
+    <aside className='p-2'>
+      <InfoUser />
+      <CardThinking />
     </aside>
   )
 }
 
-export default SideBar
+export default SideBar;

@@ -23,7 +23,7 @@ const Routers = () => {
 
         <Route path="/social" element={<PrivateLayout />}>
           <Route index element={<Feed />} />
-          <Route path="feed" element={<Feed />} />
+
         </Route>
 
         <Route path="*" element={<h1>Error 404</h1>} />
