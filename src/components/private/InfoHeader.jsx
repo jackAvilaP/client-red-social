@@ -9,11 +9,9 @@ const InfoHeader = () => {
     const { user } = useSelector((state) => state.users);
 
 
-
     useEffect(() => {
         dispatch(getUser())
     }, [1])
-
 
     return (
         <section className="header-info">

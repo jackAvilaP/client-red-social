@@ -1,21 +1,22 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Global } from "../../helpers/Global";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { saveUser } from "../../app/slices/users";
+
 import useForm from "../../hooks/useForm";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { message } = useSelector((state) => state.users);
   const { form, changed } = useForm({});
-  const [saveUser, setSaveUser] = useState("not saved");
 
   const saveRegister = async (e) => {
     e.preventDefault();
     let newUser = form;
-
-    axios.post(Global.localhost + "user/register", newUser)
-      .then((res) => setSaveUser(res.data?.message));
-
+    dispatch(saveUser(newUser));
   };
-  
+
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-base-200">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -50,7 +51,7 @@ const Register = () => {
               <span className="label-text">Email</span>
             </label>
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="email"
               className="input input-bordered"
@@ -77,27 +78,23 @@ const Register = () => {
         </form>
       </div>
       <div className="text-center">
-        {
-          saveUser === "success" &&
+        {message === "success" && (
           <h1 className="text-5xl font-bold w-60">User saved!</h1>
-        }
-        {
-          saveUser === "Error query :(" &&
-          <h1 className="text-5xl font-bold w-60">User not saved!</h1>
-
-        }
-        {
-          saveUser === "users exist" &&
+        )}
+        {message === "Error query :(" ||
+          (message === "not saved" && (
+            <h1 className="text-5xl font-bold w-60">User not saved!</h1>
+          ))}
+        {message === "users exist" && (
           <h1 className="text-5xl font-bold w-60">The user exists!</h1>
-        }
-        {
-          saveUser === "missing data :(" || !form &&
-          <h1 className="text-5xl font-bold w-60">Please enter data</h1>
-        }
+        )}
+        {message === "missing data :(" ||
+          (!form && (
+            <h1 className="text-5xl font-bold w-60">Please enter data</h1>
+          ))}
       </div>
     </div>
   );
-
 };
 
 export default Register;

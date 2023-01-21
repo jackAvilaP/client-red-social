@@ -7,7 +7,7 @@ const CardThinking = () => {
                 <p className='card-title'>what are you thinking?</p>
             </section>
             <section className='card-body'>
-                <textarea className="textarea textarea-ghost"></textarea>
+                <textarea className="textarea textarea-ghost border-primary focus:border-teal-500 focus:outline-none"></textarea>
                 <div className='card-header'>
                     <h2 className='card-subtitle'>Upload your photo</h2>
                 </div>
