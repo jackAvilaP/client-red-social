@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+//Slices
+import { getUser } from '../../app/slices/users';
 
 const InfoHeader = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.users);
+
+
+
+    useEffect(() => {
+        dispatch(getUser())
+    }, [1])
+
+
     return (
         <section className="header-info">
             <div className='header-title'>

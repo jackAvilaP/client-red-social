@@ -4,7 +4,6 @@ import SideBar from '../private/SideBar';
 import CardPublication from './CardPublication';
 
 
-
 const Feed = () => {
 
   return (

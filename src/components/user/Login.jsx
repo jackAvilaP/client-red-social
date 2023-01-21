@@ -1,31 +1,24 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Global } from "../../helpers/Global";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import useForm from "../../hooks/useForm";
 
-
-
+//Slices
+import { postUser } from '../../app/slices/users'
 
 
 
 const Login = () => {
   const { form, changed } = useForm({});
-  const [loginMessage, setLoginMessage] = useState("");
+  const dispatch = useDispatch();
+  const { message: loginMessage } = useSelector((state) => state.users);
+
 
 
   const loginUser = async (e) => {
     e.preventDefault();
     let login = form;
-    
-    axios.post(Global.localhost + "user/login", login)
-      .then((res) => {
-        setLoginMessage(res.data?.message);
-        if (loginMessage === "success") {
-          localStorage.setItem("token", res.data?.token);
-          localStorage.setItem("user", JSON.stringify(res.data?.user));
-        }
-      });
-
+    dispatch(postUser(login));
   }
 
 
@@ -72,7 +65,6 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <button className="btn btn-primary"> Slice</button>
         </div>
       </div>
     </div>
