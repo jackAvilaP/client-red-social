@@ -1,20 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+
 import NavBar from "./NavBar";
 
 const PrivateLayout = () => {
+  const token = localStorage.getItem("token");
 
   return (
     <>
       {/* LAYAOUT */}
       <NavBar />
+
       {/* Content Main */}
-      <section>
-        {/* Private header */}
-        <section>
-          <Outlet />
-        </section>
-      </section>
+      <section>{token ? <Outlet /> : <Navigate to="/login" />}</section>
     </>
   );
 };

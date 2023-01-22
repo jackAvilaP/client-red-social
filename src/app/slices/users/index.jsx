@@ -8,6 +8,7 @@ export const userSlice = createSlice({
   initialState: {
     message: "",
     user: {},
+    counters: {},
   },
   reducers: {
     loginUser: (state, action) => {
@@ -16,15 +17,17 @@ export const userSlice = createSlice({
     setMessage: (state, action) => {
       state.message = action.payload;
     },
+    setCounter: (state, action) => {
+      state.counters = action.payload;
+    },
   },
 });
 
-export const { loginUser, setMessage } = userSlice.actions;
+export const { loginUser, setMessage, setCounter } = userSlice.actions;
 export default userSlice.reducer;
 
 //get user
 export const postUser = (login) => async (dispatch) => {
-  
   dispatch(setIsLoading(true));
   try {
     try {
@@ -50,7 +53,7 @@ export const postUser = (login) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-  dispatch(setIsLoading(true));
+  
   let token = localStorage.getItem("token");
   let { id } = JSON.parse(localStorage.getItem("user"));
 
@@ -63,18 +66,20 @@ export const getUser = () => async (dispatch) => {
           },
         })
         .then((res) => dispatch(loginUser(res.data?.user)));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   } finally {
-    return dispatch(setIsLoading(false));
+    
   }
 };
 
 export const saveUser = (newUser) => async (dispatch) => {
-  let counterObj = Object.entries(newUser).length 
-  if (counterObj === 0 || counterObj <=4) {
+  let counterObj = Object.entries(newUser).length;
+  if (counterObj === 0 || counterObj <= 4) {
     return dispatch(setMessage("not saved"));
   }
-  
+
   try {
     try {
       await axios
@@ -90,6 +95,25 @@ export const saveUser = (newUser) => async (dispatch) => {
       }
     }
   } finally {
-    return dispatch(setIsLoading(false));
+    
+  }
+};
+
+export const getCounter = () => async (dispatch) => {
+  
+  let token = localStorage.getItem("token");
+  let { id } = JSON.parse(localStorage.getItem("user"));
+  try {
+    try {
+      axios
+        .get(Global.localhost + "user/count/" + id, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => dispatch(setCounter(res.data)));
+    } catch (error) {}
+  } finally {
+   
   }
 };

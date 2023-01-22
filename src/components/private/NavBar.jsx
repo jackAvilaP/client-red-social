@@ -1,7 +1,11 @@
 import React from "react";
-import user from "../../assets/img/user.png";
+import userImg from "../../assets/img/user.png";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+const { user } = useSelector(state=> state.users);
+
+
   return (
     <div className="navbar bg-base-100 flex justify-between shadow-lg ">
       {/* Icon socila space */}
@@ -132,11 +136,11 @@ const NavBar = () => {
             <input type="checkbox" className="toggle mx-3" />
           </div>
         </div>
-        <p>Nick</p>
+        <p>{user.nick}</p>
         <div className="dropdown dropdown-end mx-4">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={user} />
+              <img src={userImg} />
             </div>
           </label>
 

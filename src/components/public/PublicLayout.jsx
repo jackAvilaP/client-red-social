@@ -1,16 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 
+
 const PublicLayout = () => {
+  const token = localStorage.getItem("token");
+
   return (
     <>
       {/* LAYAOUT */}
       <NavBar />
+      
       {/* Content Main */}
-      <section>
-        <Outlet />
-      </section>
+      <section>{!token ? <Outlet /> : <Navigate to="/social" />}</section>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react'
 
 const CardThinking = () => {
+    
     return (
         <div className='card mt-3'>
             <section className='card-header'>
