@@ -1,11 +1,19 @@
 import React from "react";
 import userImg from "../../assets/img/user.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../app/slices/users";
 
 const NavBar = () => {
-const { user } = useSelector(state=> state.users);
+  const { user } = useSelector(state => state.users);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-
+  const logout = () => {
+    localStorage.clear();
+    dispatch(logoutUser({}))
+    navigate("/login");
+  }
   return (
     <div className="navbar bg-base-100 flex justify-between shadow-lg ">
       {/* Icon socila space */}
@@ -148,28 +156,9 @@ const { user } = useSelector(state=> state.users);
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
+
             <li>
-              <a className="justify-between">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                  />
-                </svg>
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>
+              <NavLink to="/social/setting">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -185,9 +174,9 @@ const { user } = useSelector(state=> state.users);
                   />
                 </svg>
                 Settings
-              </a>
+              </NavLink>
             </li>
-            <li>
+            <li onClick={logout}>
               <a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

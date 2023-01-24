@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 
@@ -10,12 +11,24 @@ const Login = () => {
   const { form, changed } = useForm({});
   const dispatch = useDispatch();
   const { message: loginMessage } = useSelector((state) => state.users);
+  const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
     let login = form;
     dispatch(postUser(login));
   };
+  useEffect(() => {
+    if (loginMessage === "success") {
+      setTimeout(() => {
+        navigate("/social");
+      }, 1000)
+
+
+    } else {
+      navigate("/");
+    }
+  }, [loginMessage])
 
   return (
     <div className=" min-h-screen text-center bg-base-200">

@@ -72,7 +72,7 @@ const Register = () => {
           </div>
           <div className="form-control mt-2">
             <button type="submit" className="btn btn-primary">
-              Register
+              Sign up
             </button>
           </div>
         </form>

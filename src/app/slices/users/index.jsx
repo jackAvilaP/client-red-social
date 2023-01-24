@@ -14,6 +14,11 @@ export const userSlice = createSlice({
     loginUser: (state, action) => {
       state.user = action.payload;
     },
+    logoutUser: (state, action) => {
+      state.user = action.payload
+      state.counters = action.payload
+      state.message = action.payload
+    },
     setMessage: (state, action) => {
       state.message = action.payload;
     },
@@ -23,7 +28,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser, setMessage, setCounter } = userSlice.actions;
+export const { loginUser, setMessage, setCounter, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
 
 //get user
@@ -53,7 +58,7 @@ export const postUser = (login) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-  
+
   let token = localStorage.getItem("token");
   let { id } = JSON.parse(localStorage.getItem("user"));
 
@@ -70,7 +75,7 @@ export const getUser = () => async (dispatch) => {
       console.log(error)
     }
   } finally {
-    
+
   }
 };
 
@@ -95,12 +100,12 @@ export const saveUser = (newUser) => async (dispatch) => {
       }
     }
   } finally {
-    
+
   }
 };
 
 export const getCounter = () => async (dispatch) => {
-  
+
   let token = localStorage.getItem("token");
   let { id } = JSON.parse(localStorage.getItem("user"));
   try {
@@ -112,8 +117,8 @@ export const getCounter = () => async (dispatch) => {
           },
         })
         .then((res) => dispatch(setCounter(res.data)));
-    } catch (error) {}
+    } catch (error) { }
   } finally {
-   
+
   }
 };

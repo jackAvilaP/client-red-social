@@ -10,7 +10,7 @@ const PublicLayout = () => {
     <>
       {/* LAYAOUT */}
       <NavBar />
-      
+
       {/* Content Main */}
       <section>{!token ? <Outlet /> : <Navigate to="/social" />}</section>
     </>
