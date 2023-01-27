@@ -1,14 +1,32 @@
+
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../app/slices/users';
-import useForm from '../../hooks/useForm';
+
+import userImg from "../../assets/img/user.png";
+import { Global } from '../../helpers/Global';
+import { SerializeForm } from '../../helpers/SerializeForm';
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const { form, changed } = useForm({});
+  const { user } = useSelector(state => state.users);
+
+
+
+  const updateUser = (e) => {
+    
+    let newData = SerializeForm(e.target);
+
+    delete newData.file0;
+
+    dispatch(updateUser(newData))
+
+  }
+
   useEffect(() => {
-    dispatch(getUser())
-  }, [1])
+    dispatch(getUser());
+  }, [user])
+
   return (
     <div className='mt-14 max-w-lg flex flex-col justify-center'>
       <section className="header-info">
@@ -19,7 +37,7 @@ const Setting = () => {
       <div className='card mt-3'>
         <section className='card-body'>
 
-          <form className="card-body">
+          <form className="card-body" onSubmit={updateUser}>
             <div className="form-control">
               <label className="label">
                 <span className="card-title">Name</span>
@@ -29,7 +47,8 @@ const Setting = () => {
                 name="name"
                 placeholder="Name"
                 className="input input-bordered"
-                onChange={changed}
+                
+                defaultValue={user.name}
               />
             </div>
 
@@ -42,7 +61,9 @@ const Setting = () => {
                 name="nick"
                 placeholder="Nick"
                 className="input input-bordered"
-                onChange={changed}
+
+                defaultValue={user.nick}
+
               />
             </div>
             <div className="form-control">
@@ -54,7 +75,9 @@ const Setting = () => {
                 name="email"
                 placeholder="email"
                 className="input input-bordered"
-                onChange={changed}
+
+                defaultValue={user.email}
+
               />
             </div>
             <div className="form-control">
@@ -66,19 +89,26 @@ const Setting = () => {
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
-                onChange={changed}
+
               />
             </div>
 
             <div className="form-control">
+
               <label className="label">
                 <span className="card-title">Avatar</span>
               </label>
+              <div className="avatar mb-3">
+                <div className="w-20 rounded-full">
+                  {user.image == "default.png" && <img src={userImg} alt="profile photo" />}
+                  {user.image != "default.png" && <img src={Global.localhost + "user/avatar" + user.image} alt="profile photo" />}
+                </div>
+              </div>
               <input
                 type="file"
                 className="file-input file-input-bordered file-input-primary w-full "
                 name='file'
-                onChange={changed}
+
               />
             </div>
 

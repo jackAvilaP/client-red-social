@@ -104,6 +104,37 @@ export const saveUser = (newUser) => async (dispatch) => {
   }
 };
 
+export const updateUser = (newData) => async () => {
+  
+  let data = JSON.stringify(newData);
+  let token = localStorage.getItem('token');
+
+  try {
+    try {
+      await axios
+        .put(Global.localhost + "/update", data, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => { 
+          console.log(res.data)
+          dispatch(setMessage(res.data?.message))
+        });
+    } catch (error) {
+      if (
+        error.response.status === 401 ||
+        error.response.status === 404 ||
+        error.response.status === 400
+      ) {
+        alert(error.response.data.message);
+      }
+    }
+  } finally {
+
+  }
+}
+
 export const getCounter = () => async (dispatch) => {
 
   let token = localStorage.getItem("token");
