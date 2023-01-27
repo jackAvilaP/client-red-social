@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const SerializeForm = (target) => {
     const formData = new FormData(target);

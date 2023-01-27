@@ -15,9 +15,9 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     logoutUser: (state, action) => {
-      state.user = action.payload
-      state.counters = action.payload
-      state.message = action.payload
+      state.user = action.payload;
+      state.counters = action.payload;
+      state.message = action.payload;
     },
     setMessage: (state, action) => {
       state.message = action.payload;
@@ -28,7 +28,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser, setMessage, setCounter, logoutUser } = userSlice.actions;
+export const { loginUser, setMessage, setCounter, logoutUser } =
+  userSlice.actions;
 export default userSlice.reducer;
 
 //get user
@@ -58,7 +59,6 @@ export const postUser = (login) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-
   let token = localStorage.getItem("token");
   let { id } = JSON.parse(localStorage.getItem("user"));
 
@@ -72,16 +72,15 @@ export const getUser = () => async (dispatch) => {
         })
         .then((res) => dispatch(loginUser(res.data?.user)));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   } finally {
-
   }
 };
 
 export const saveUser = (newUser) => async (dispatch) => {
   let counterObj = Object.entries(newUser).length;
-  if (counterObj === 0 || counterObj <= 4) {
+  if (counterObj === 0 || counterObj < 4) {
     return dispatch(setMessage("not saved"));
   }
 
@@ -100,26 +99,22 @@ export const saveUser = (newUser) => async (dispatch) => {
       }
     }
   } finally {
-
   }
 };
 
 export const updateUser = (newData) => async () => {
-  
-  let data = JSON.stringify(newData);
-  let token = localStorage.getItem('token');
-
+  let token = localStorage.getItem("token");
   try {
     try {
       await axios
-        .put(Global.localhost + "/update", data, {
+        .put(Global.localhost + "update", newData, {
           headers: {
             Authorization: token,
           },
         })
-        .then((res) => { 
-          console.log(res.data)
-          dispatch(setMessage(res.data?.message))
+        .then((res) => {
+          console.log(res.data);
+          dispatch(setMessage(res.data?.message));
         });
     } catch (error) {
       if (
@@ -131,12 +126,10 @@ export const updateUser = (newData) => async () => {
       }
     }
   } finally {
-
   }
-}
+};
 
 export const getCounter = () => async (dispatch) => {
-
   let token = localStorage.getItem("token");
   let { id } = JSON.parse(localStorage.getItem("user"));
   try {
@@ -148,8 +141,7 @@ export const getCounter = () => async (dispatch) => {
           },
         })
         .then((res) => dispatch(setCounter(res.data)));
-    } catch (error) { }
+    } catch (error) {}
   } finally {
-
   }
 };
