@@ -107,7 +107,7 @@ export const updateUser = (newData) => async () => {
   try {
     try {
       await axios
-        .put(Global.localhost + "update", newData, {
+        .put(Global.localhost + "user/update", newData, {
           headers: {
             Authorization: token,
           },
@@ -141,7 +141,7 @@ export const getCounter = () => async (dispatch) => {
           },
         })
         .then((res) => dispatch(setCounter(res.data)));
-    } catch (error) {}
+    } catch (error) { }
   } finally {
   }
 };

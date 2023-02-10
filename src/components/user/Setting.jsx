@@ -15,29 +15,18 @@ const Setting = () => {
 
   const userUpdate = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
 
     let newData = SerializeForm(e.target);
-
-    delete newData.file;
     let data = newData;
-    
-    await axios
-      .put(Global.localhost + "update", data, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        //dispatch(setMessage(res.data?.message));
-      });
-    // dispatch(updateUser(newData));
+
+    data['image'] = data.image?.name;
+
+    dispatch(updateUser(newData));
   };
 
   useEffect(() => {
     dispatch(getUser());
-  }, []);
+  }, [user]);
 
   return (
     <div className="mt-14 max-w-lg flex flex-col justify-center">
@@ -118,7 +107,7 @@ const Setting = () => {
               <input
                 type="file"
                 className="file-input file-input-bordered file-input-primary w-full "
-                name="file"
+                name="image"
               />
             </div>
 
