@@ -19,14 +19,11 @@ const Setting = () => {
     let newData = SerializeForm(e.target);
     let data = newData;
 
-    data['image'] = data.image?.name;
+    data["image"] = data.image?.name;
 
     dispatch(updateUser(newData));
-  };
-
-  useEffect(() => {
     dispatch(getUser());
-  }, [user]);
+  };
 
   return (
     <div className="mt-14 max-w-lg flex flex-col justify-center">
