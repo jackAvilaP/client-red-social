@@ -102,6 +102,22 @@ export const saveUser = (newUser) => async (dispatch) => {
   }
 };
 
+//Upload images perfil user
+export const uploadFile = (newFile) => async () => {
+  let token = localStorage.getItem("token");
+  try {
+    await axios
+      .post(Global.localhost + "user/upload", newFile, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => console.log(res.data.user));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateUser = (newData) => async () => {
   let token = localStorage.getItem("token");
   try {
@@ -113,8 +129,8 @@ export const updateUser = (newData) => async () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          dispatch(setMessage(res.data?.message));
+          console.log(res.data?.status);
+          dispatch(setMessage("res.data?.status"));
         });
     } catch (error) {
       if (
@@ -141,7 +157,7 @@ export const getCounter = () => async (dispatch) => {
           },
         })
         .then((res) => dispatch(setCounter(res.data)));
-    } catch (error) { }
+    } catch (error) {}
   } finally {
   }
 };

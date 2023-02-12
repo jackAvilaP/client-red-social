@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Slices
-import { getUser, updateUser } from "../../app/slices/users";
+import { getUser, updateUser, uploadFile } from "../../app/slices/users";
 
 import userImg from "../../assets/img/user.png";
 import { Global } from "../../helpers/Global";
@@ -17,11 +17,20 @@ const Setting = () => {
     e.preventDefault();
 
     let newData = SerializeForm(e.target);
+    let newFile = new FormData();
+
     let data = newData;
 
-    data["image"] = data.image?.name;
+    data["image"] = "default.png";
 
-    dispatch(updateUser(newData));
+    const fileInput = document.querySelector("#file");
+
+    newFile.append("file0", fileInput.files[0]);
+
+    //upload image
+    fileInput.files[0] && dispatch(uploadFile(newFile));
+
+    dispatch(updateUser(data));
     dispatch(getUser());
   };
 
@@ -105,6 +114,7 @@ const Setting = () => {
                 type="file"
                 className="file-input file-input-bordered file-input-primary w-full "
                 name="image"
+                id="file"
               />
             </div>
 

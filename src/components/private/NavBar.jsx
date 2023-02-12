@@ -5,15 +5,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../app/slices/users";
 
 const NavBar = () => {
-  const { user } = useSelector(state => state.users);
+  const { user } = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
-    dispatch(logoutUser({}))
+    dispatch(logoutUser({}));
     navigate("/login");
-  }
+  };
   return (
     <div className="navbar bg-base-100 flex justify-between shadow-lg ">
       {/* Icon socila space */}
@@ -148,7 +148,11 @@ const NavBar = () => {
         <div className="dropdown dropdown-end mx-4">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={userImg} />
+              {user.image === "default.png" ? (
+                <img src={userImg} />
+              ) : (
+                <img src={user.image} />
+              )}
             </div>
           </label>
 
@@ -156,7 +160,6 @@ const NavBar = () => {
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
-
             <li>
               <NavLink to="/social/setting">
                 <svg
