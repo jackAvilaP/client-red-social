@@ -32,6 +32,10 @@ export const { loginUser, setMessage, setCounter, logoutUser } =
   userSlice.actions;
 export default userSlice.reducer;
 
+export const prueba = () => async (dispatch) => {
+  dispatch(setMessage("desde prueba"));
+};
+
 //get user
 export const postUser = (login) => async (dispatch) => {
   dispatch(setIsLoading(true));
@@ -103,7 +107,7 @@ export const saveUser = (newUser) => async (dispatch) => {
 };
 
 //Upload images perfil user
-export const uploadFile = (newFile) => async () => {
+export const uploadFile = (newFile) => async (dispatch) => {
   let token = localStorage.getItem("token");
   try {
     await axios
@@ -112,13 +116,17 @@ export const uploadFile = (newFile) => async () => {
           Authorization: token,
         },
       })
-      .then((res) => console.log(res.data.user));
+      .then((res) => {
+        delete res.data.user.password;
+        dispatch(loginUser(res.data?.user));
+        localStorage.setItem("user", JSON.stringify(res.data?.user));
+      });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateUser = (newData) => async () => {
+export const updateUser = (newData) => async (dispatch) => {
   let token = localStorage.getItem("token");
   try {
     try {
@@ -129,8 +137,8 @@ export const updateUser = (newData) => async () => {
           },
         })
         .then((res) => {
-          console.log(res.data?.status);
-          dispatch(setMessage("res.data?.status"));
+          dispatch(setMessage(res.data.status));
+          dispatch(loginUser(res.data.user));
         });
     } catch (error) {
       if (

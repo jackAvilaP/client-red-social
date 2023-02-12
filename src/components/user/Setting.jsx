@@ -29,9 +29,7 @@ const Setting = () => {
 
     //upload image
     fileInput.files[0] && dispatch(uploadFile(newFile));
-
     dispatch(updateUser(data));
-    dispatch(getUser());
   };
 
   return (
