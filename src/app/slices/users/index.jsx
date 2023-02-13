@@ -90,12 +90,13 @@ export const getListUser = () => async (dispatch) => {
   let token = localStorage.getItem("token");
   try {
     axios
-      .get(Global.localhost + "user/list", {
+      .get(Global.localhost + "user/list?limit=4&page=3", {
         headers: {
           Authorization: token,
         },
       })
       .then((res) => {
+        console.log(res.data)
         dispatch(listUsers(res.data.user?.docs));
       });
   } catch (error) {

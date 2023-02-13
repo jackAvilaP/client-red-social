@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const PaginateBtn = () => {
+const PaginateBtn = ({ totalPages }) => {
+  const [pages, setPages] = useState([1,2,3])
+
+  console.log(pages)
   return (
     <div className="btn-group">
-      <input type="radio" name="options" data-title="1" className="btn" />
-      <input type="radio" name="options" data-title="2" className="btn" />
-      <input type="radio" name="options" data-title="3" className="btn" />
-      <input type="radio" name="options" data-title="4" className="btn" />
+      {
+        pages.map(page => {
+          <input type="radio" name="options" data-title={page.toString} className="btn" />
+        })
+      }
+
     </div>
   );
 };

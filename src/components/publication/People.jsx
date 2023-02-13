@@ -7,7 +7,7 @@ import CardPeople from "./CardPeople";
 const People = () => {
   const dispatch = useDispatch();
   const { listUsers } = useSelector((state) => state.users);
-
+  const totalPages = 3
   useEffect(() => {
     dispatch(getListUser());
   }, []);
@@ -23,7 +23,7 @@ const People = () => {
             <CardPeople list={list} key={list._id} />
           ))}
         </div>
-      <PaginateBtn/>
+        <PaginateBtn totalPages={totalPages} />
       </section>
     </div>
   );
