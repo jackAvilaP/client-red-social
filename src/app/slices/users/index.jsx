@@ -8,6 +8,7 @@ export const userSlice = createSlice({
   initialState: {
     message: "",
     user: {},
+    listUsers: [],
     counters: {},
   },
   reducers: {
@@ -19,6 +20,9 @@ export const userSlice = createSlice({
       state.counters = action.payload;
       state.message = action.payload;
     },
+    listUsers: (state, action) => {
+      state.listUsers = action.payload;
+    },
     setMessage: (state, action) => {
       state.message = action.payload;
     },
@@ -28,7 +32,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginUser, setMessage, setCounter, logoutUser } =
+export const { loginUser, setMessage, listUsers, setCounter, logoutUser } =
   userSlice.actions;
 export default userSlice.reducer;
 
@@ -79,6 +83,23 @@ export const getUser = () => async (dispatch) => {
       console.log(error);
     }
   } finally {
+  }
+};
+
+export const getListUser = () => async (dispatch) => {
+  let token = localStorage.getItem("token");
+  try {
+    axios
+      .get(Global.localhost + "user/list", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        dispatch(listUsers(res.data.user?.docs));
+      });
+  } catch (error) {
+    console.log(error);
   }
 };
 

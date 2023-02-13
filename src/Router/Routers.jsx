@@ -7,14 +7,14 @@ import PrivateLayout from "../components/private/PrivateLayout";
 import PublicLayout from "../components/public/PublicLayout";
 
 import Feed from "../components/publication/Feed";
+import People from "../components/publication/People";
+
 import Publications from "../components/publication/Publications";
 import Login from "../components/user/Login";
 import Register from "../components/user/Register";
 import Setting from "../components/user/Setting";
 
-
 const Routers = () => {
-
   return (
     <BrowserRouter>
       {/* nested routes */}
@@ -24,14 +24,13 @@ const Routers = () => {
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-
         </Route>
         <Route path="/social" element={<PrivateLayout />}>
           <Route index element={<Feed />} />
           <Route path="feed" element={<Feed />} />
+          <Route path="people" element={<People />} />
           <Route path="publications" element={<Publications />} />
-          <Route path="setting" element={<Setting/>}/>
-
+          <Route path="setting" element={<Setting />} />
         </Route>
 
         <Route path="*" element={<h1>Error 404</h1>} />
