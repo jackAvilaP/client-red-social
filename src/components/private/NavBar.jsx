@@ -49,7 +49,7 @@ const NavBar = () => {
           </button>
         </div>
         <li>
-          <Link  to="/social">
+          <Link to="/social">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -141,7 +141,7 @@ const NavBar = () => {
                 />
               </svg>
             </section>
-            <input type="checkbox" className="toggle mx-3" />
+            <input type="checkbox" className="toggle bg-primary mx-3" />
           </div>
         </div>
         <p>{user.nick}</p>

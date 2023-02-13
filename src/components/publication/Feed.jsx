@@ -1,17 +1,12 @@
 import React from "react";
 
-
 import InfoHeader from "../private/InfoHeader";
+import PaginateBtn from "../public/PaginateBtn";
 import CardPublication from "./CardPublication";
 
-
 const Feed = () => {
-
-
   return (
-
-
-    <section >
+    <section>
       <div className="mt-11">
         <InfoHeader />
       </div>
@@ -21,9 +16,8 @@ const Feed = () => {
         <CardPublication />
         <CardPublication />
       </div>
-
+      <PaginateBtn />
     </section>
-
   );
 };
 

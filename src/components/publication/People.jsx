@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getListUser } from "../../app/slices/users";
+import PaginateBtn from "../public/PaginateBtn";
 import CardPeople from "./CardPeople";
 
 const People = () => {
@@ -22,17 +23,7 @@ const People = () => {
             <CardPeople list={list} key={list._id} />
           ))}
         </div>
-        <div className="btn-group">
-          <input type="radio" name="options" data-title="1" className="btn" />
-          <input
-            type="radio"
-            name="options"
-            data-title="2"
-            className="btn"
-          />
-          <input type="radio" name="options" data-title="3" className="btn" />
-          <input type="radio" name="options" data-title="4" className="btn" />
-        </div>
+      <PaginateBtn/>
       </section>
     </div>
   );
