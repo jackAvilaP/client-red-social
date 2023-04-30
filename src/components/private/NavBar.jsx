@@ -12,7 +12,7 @@ const NavBar = () => {
   const logout = () => {
     localStorage.clear();
     dispatch(logoutUser({}));
-    navigate("/login");
+    navigate("/");
   };
   return (
     <div className="navbar bg-base-100 flex justify-between shadow-lg ">
